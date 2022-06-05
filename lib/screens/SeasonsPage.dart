@@ -1,6 +1,9 @@
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:soccer_zone/models/SeasonsResponse.dart';
 
 import '../manager/api_client.dart';
@@ -8,6 +11,7 @@ import '../manager/api_client.dart';
 String appid = "elenasport-io1.p.rapidapi.com";
 String apikey = "aff0b3060fmsh341831e529ad917p1b0755jsnc95fe6726c71";
 int page = 1;
+
 
 FutureBuilder<SeasonsResponse> _buildBody(BuildContext context) {
   final client = ApiClient(Dio(BaseOptions(contentType: "application/json")));
@@ -33,14 +37,42 @@ ListView _buildSeasons(BuildContext context, List<Data> posts) {
     padding: EdgeInsets.all(8),
     itemBuilder: (context, index) {
       return Card(
-        elevation: 4,
-        child: ListTile(
+        elevation: 8,
+        color: Colors.white,
+        child: InkWell(
+        onTap: () {
+
+        },
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children:<Widget>[
+                // Padding(
+                //   padding: EdgeInsets.all(8.0),
+                //   child: Image.asset(
+                //     'assets/images/soccer.png',
+                //   ),
+                // ),
+                ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage: AssetImage('assets/images/soccer.png'),
+                    child: GestureDetector(onTap: () {}),
+                  ),
+                  title: Text(
+                    posts[index].leagueName.toString(),
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(posts[index].start.toString() + ' - ' + posts[index].end.toString()),
+                ),
+              ]
+          ),
+        ),
+/*        child: ListTile(
           title: Text(
             posts[index].leagueName.toString(),
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           subtitle: Text(posts[index].start.toString() + ' - ' + posts[index].end.toString()),
-        ),
+        ),*/
       );
     },
   );
