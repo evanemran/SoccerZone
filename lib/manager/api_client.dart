@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
+import 'package:soccer_zone/models/FixturesResponse.dart';
 import 'package:soccer_zone/models/SeasonsResponse.dart';
 part 'api_client.g.dart';
 
@@ -13,6 +14,14 @@ abstract class ApiClient {
   Future<SeasonsResponse> getAllSeasons(
       @Header("X-RapidAPI-Host") String appid,
       @Header("X-RapidAPI-Key") String apikey,
+      @Query("page") int page,
+      );
+
+  @GET('v2/seasons/{id}/fixtures')
+  Future<FixturesResponse> getFixturesById(
+      @Header("X-RapidAPI-Host") String appid,
+      @Header("X-RapidAPI-Key") String apikey,
+      @Path("id") int id,
       @Query("page") int page,
       );
 
