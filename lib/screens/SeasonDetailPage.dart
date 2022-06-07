@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:soccer_zone/models/FixturesResponse.dart';
 import 'package:soccer_zone/screens/SeasonsPage.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 import '../manager/api_client.dart';
 
@@ -105,26 +106,80 @@ ListView _buildFixtures(BuildContext context, List<Data> posts) {
                 children: [
                   Row(
                     children: [
-                      FadeInImage(
-                        image: NetworkImage("https://countryflagsapi.com/png/${posts[index].homeName.toString().toLowerCase()}"),
-                        width: 40,
-                        height: 25,
-                        placeholder: AssetImage(
-                            "assets/images/flag_placeholder.jpg"),
-                        imageErrorBuilder:
-                            (context, error, stackTrace) {
-                          return Image.asset(
-                              'assets/images/flag_placeholder.jpg',
-                              fit: BoxFit.fitWidth);
-                        },
-                        fit: BoxFit.fitWidth,
-                      ),
-                      const SizedBox(
-                        width: 20,
+                      Column(
+                        children: [
+                          Row(
+                            children: [
+                              FadeInImage.memoryNetwork(
+                                image: "https://countryflagsapi.com/png/${posts[index].homeName.toString().toLowerCase()}",
+                                width: 40,
+                                height: 25,
+                                placeholder: kTransparentImage,
+                                imageErrorBuilder:
+                                    (context, error, stackTrace) {
+                                  return Image.asset(
+                                      'assets/images/flag_placeholder.jpg',
+                                      width: 40,
+                                      height: 25,
+                                      fit: BoxFit.fitWidth);
+                                },
+                                fit: BoxFit.fitWidth,
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                '${posts[index].homeName}',
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 18.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            children: [
+                              FadeInImage.memoryNetwork(
+                                image: "https://countryflagsapi.com/png/${posts[index].awayName.toString().toLowerCase()}",
+                                width: 40,
+                                height: 25,
+                                placeholder: kTransparentImage,
+                                imageErrorBuilder:
+                                    (context, error, stackTrace) {
+                                  return Image.asset(
+                                      'assets/images/flag_placeholder.jpg',
+                                      width: 40,
+                                      height: 25,
+                                      fit: BoxFit.fitWidth);
+                                },
+                                fit: BoxFit.fitWidth,
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                '${posts[index].awayName}',
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 18.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                       Text(
-                        '${posts[index].homeName}',
-                        textAlign: TextAlign.start,
+                        posts[index].date.toString(),
+                        textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: Colors.black,
                           fontFamily: 'Montserrat',
@@ -134,52 +189,6 @@ ListView _buildFixtures(BuildContext context, List<Data> posts) {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      FadeInImage(
-                        image: NetworkImage("https://countryflagsapi.com/png/${posts[index].awayName.toString().toLowerCase()}"),
-                        width: 40,
-                        height: 25,
-                        placeholder: AssetImage(
-                            "assets/images/flag_placeholder.jpg"),
-                        imageErrorBuilder:
-                            (context, error, stackTrace) {
-                          return Image.asset(
-                              'assets/images/flag_placeholder.jpg',
-                              width: 40,
-                              height: 25,
-                              fit: BoxFit.fitWidth);
-                        },
-                        fit: BoxFit.fitWidth,
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Text(
-                        '${posts[index].awayName}',
-                        textAlign: TextAlign.start,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.w400,
-                          fontSize: 18.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                  // Text(
-                  //   '${posts[index].homeName} vs ${posts[index].awayName}',
-                  //   textAlign: TextAlign.center,
-                  //   style: const TextStyle(
-                  //       color: Colors.black,
-                  //       fontFamily: 'Montserrat',
-                  //       fontWeight: FontWeight.w400,
-                  //       fontSize: 24.0,
-                  //   ),
-                  // ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -187,23 +196,23 @@ ListView _buildFixtures(BuildContext context, List<Data> posts) {
                     posts[index].seasonName.toString(),
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 18.0,
+                      color: Colors.black,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 18.0,
                     ),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   Text(
-                    posts[index].date.toString(),
+                    '${posts[index].homeName} vs ${posts[index].awayName}',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 18.0,
+                        color: Colors.black,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 24.0,
                     ),
                   ),
                 ],

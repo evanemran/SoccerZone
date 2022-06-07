@@ -12,8 +12,8 @@ import 'package:soccer_zone/screens/SeasonDetailPage.dart';
 import '../manager/api_client.dart';
 
 String appid = "elenasport-io1.p.rapidapi.com";
-// String apikey = "aff0b3060fmsh341831e529ad917p1b0755jsnc95fe6726c71";
-String apikey = "7cd3cf3d34msh70137379717ab8dp127d88jsnf617cfcf851f";
+String apikey = "aff0b3060fmsh341831e529ad917p1b0755jsnc95fe6726c71";
+// String apikey = "7cd3cf3d34msh70137379717ab8dp127d88jsnf617cfcf851f";
 int page = 1;
 List<Data>? seasons = [];
 
